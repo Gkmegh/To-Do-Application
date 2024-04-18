@@ -1,0 +1,33 @@
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTask } from '../redux/actions';
+
+const TaskInput = () => {
+  const [task, setTask] = useState('');
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setTask(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (task.trim() !== '') {
+      dispatch(addTask(task));
+      setTask('');
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={task}
+        onChange={handleChange}
+        placeholder="Enter a new task"
+      />
+      <button onClick={handleSubmit}>Add Task</button>
+    </div>
+  );
+};
+
+export default TaskInput;
